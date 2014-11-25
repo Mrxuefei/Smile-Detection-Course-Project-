@@ -1,5 +1,5 @@
-#include "cv.h"
-#include "highgui.h"
+#include <cv.h>
+#include <highgui.h>
 #include "MyCode.h"
 #include "svm.h"
 #include <stdlib.h>
@@ -10,7 +10,6 @@
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/nonfree/features2d.hpp"
 
- 
 
 using namespace std;
 using namespace cv;
@@ -61,8 +60,8 @@ Mat getInv_feature(Mat& img, int index)
 				SiftFeatureDetector detector;
 				std::vector<KeyPoint> keypoints;
 				detector.detect(img,keypoints);
-				SiftDescriptorExtractor extractor;
-				extractor.compute(img, keypoints, descriptors );
+				SiftDescriptorExtractor* extractor = new SiftDescriptorExtractor();
+				extractor->compute(img, keypoints, descriptors);
 				break;
 			}
 		default:// hog
