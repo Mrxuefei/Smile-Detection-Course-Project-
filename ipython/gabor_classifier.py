@@ -142,7 +142,17 @@ def get_pixels_diff(x):
                 if (cnt % 100000) == 0:
                 	print "processed %% ", (float(cnt)/num_of_pixels)
 
+def get_pca(mydata):
+    r=np.ndarray((mydata.shape[0], 20*48) )
+    pca = PCA(n_components=20)
+    for i in range(mydata.shape[0]):
+        img = mydata[i]
+        results = pca.fit_transform(img.reshape(48,48))
+        r[i] = results.reshape(1, results.shape[0]*results.shape[1])
+#         r[i] = results.components_.reshape(1,results.components_.shape[0]*results.components_.shape[1])
+    return r
 
+    
 if __name__ == '__main__':
 	a_list = []
 	# size_list = [20, 24, 28, 32, 36, 40, 44, 48]
