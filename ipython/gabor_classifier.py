@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 from sklearn import svm, metrics
 from sklearn import cross_validation
 
+face_cascade = cv2.CascadeClassifier('/home/datamining/opencv/data/haarcascades/haarcascade_frontalface_default.xml')
+
 def get_frontal_face(img, img_size, scale=1.1, size=5, ):
     faces = face_cascade.detectMultiScale(img, 1.1, 5)
     if len(faces) > 0:
@@ -140,7 +142,6 @@ def get_pixels_diff(x):
                 if (cnt % 100000) == 0:
                 	print "processed %% ", (float(cnt)/num_of_pixels)
 
-face_cascade = cv2.CascadeClassifier('/home/datamining/opencv/data/haarcascades/haarcascade_frontalface_default.xml')
 
 if __name__ == '__main__':
 	a_list = []
