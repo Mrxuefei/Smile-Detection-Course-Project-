@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
 def load_smile_data():
+	print "loading data..."
 	start_time = time.time()
 	x = pickle.load(open( "smile_data.p", "rb"))
 	y = pickle.load(open( "smile_labels.p", "rb"))
@@ -29,8 +30,9 @@ def shuffle(df):
     return df
 
 def save_pickle_data():
+	print "loading scv file..."
 	data = pd.read_csv('../fer2013.csv')
-
+	print "loaded."
 	for i in range(data.shape[0]):
 	    data['emotion'][i] = int(data['emotion'][i])
 	    img = data['pixels'][i].split()
