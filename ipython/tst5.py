@@ -10,6 +10,7 @@ def get_mouth_pixels(imgs):
 	x = np.ndarray((imgs.shape[0],14*24))
 	for i in range(imgs.shape[0]):
 		img = imgs[i]
+		img = img.reshape(48, 48)
 		img = img[32:46, 12:36]
 		x[i] = img.reshape(-1)
 	return x
