@@ -30,7 +30,7 @@ if __name__ == '__main__':
 	for img_size in size_list:
 		x, y = filter_by_frontal_faces(data_x, data_y, img_size)
 
-		# x = get_pixels_diff(x)
+		x = get_pixels_diff(x)
 		
 		clf = AdaBoostClassifier(n_estimators=2000)
 		scores = cross_val_score(clf, x, y.reshape(-1))
