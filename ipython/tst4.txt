@@ -1,0 +1,11 @@
+--- Load data in 68.576018095 seconds ---
+data size is :  24189
+Positive labels:  8989
+Negtive labels:  15200
+(24189, 2304) (24189, 1)
+uint8
+data size is :  5330
+Positive labels:  2611
+Negtive labels:  2719
+--- 4216.57924795 seconds ---
+Acuracy:          0.815011955006

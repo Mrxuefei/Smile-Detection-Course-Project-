@@ -1,0 +1,9 @@
+--- Load data in 68.3889210224 seconds ---
+data size is :  24189
+Positive labels:  8989
+Negtive labels:  15200
+data size is :  5330
+Positive labels:  2611
+Negtive labels:  2719
+--- 4178.52745914 seconds ---
+Acuracy:          0.816137659232
