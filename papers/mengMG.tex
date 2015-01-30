@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{mdwmath}
+\usepackage{mdwtab}
+\usepackage{eqparbox}
+
+
+\headheight 10pt
+\headsep 20pt
+\topmargin 20pt
+\oddsidemargin 0pt
+\textwidth 170.0mm
+\textheight 210.0mm
+\pagestyle{myheadings}
+\renewcommand{\baselinestretch}{1.25}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+\renewcommand{\textfraction}{0}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\begin{document}
+\markright{\bf Calculation of MG edge map}
+
+\section{Introduction}
+
+\cite{3} introduce a detector, produce Pb$(x, y, \theta)$ which predicts the posterior probability of a boundary at each image pixel. It measures the differences of two halves of a disc of radius r at $(x, y)$ divided by a diameter at different angles $\theta$. In this work, we divide $\theta$ into 8 orientations in the range $[0, \pi)$.
+
+In this paper, we implement the calculation of local cues gradients. Use local cues information for contour detection. At first, calculate Brightness Gradient BG$(x, y, r, \theta)$ on every pixel. Second, calculate the difference between two halves to disc. In order to get a high performance, we can combine these cues at three scales r value: $[\frac{r}{2},r,2r]$
+
+
+\section{Calculation}
+\label{secIntro}
+We implement the work of \cite{1}.\\\\
+For the input of the calculation, we choose three static consecutive frames, which represented by variables \emph{It\_back}, \emph{It}, \emph{It\_after}.
+Then after changing the to grey images, we convert these variables into double format using \emph{im2double()}.\\\\
+Steps below are used to compute the motion gradient:
+\\
+1. Compute temporal derivatives with respect to the previous and subsequent frames:
+\begin{equation}
+D^-=Dm=It-It\_back\\
+\end{equation}
+\begin{equation}
+D^+=Dp=It-It\_after\\
+\end{equation}
+\\
+2. For different images we need a scale parameter. In this case, the parameter is disc's radius. To choose an optimal range,  \cite{3} suggest 0.75 to 1.5 percent in units of percentage of the image diagonal for Brightness Gradient. These scales are optimal, the middle scale always performs best for Brightness Gradient \cite{3}. Here We make radius \emph{r} equal to the middle scale value, 1.125 percent of the image diagonal. In order to prevent the boundary overflow, we set \emph{(x,y)} limit value as: $\left [ \emph{r+1}, \emph{max\_row\_value-(r+1)} \right ]$, $\left [ \emph{r+1}, \emph{max\_col\_value-(r+1)} \right]$.
+\begin{equation}
+r+1 < x < max\_row\_value - (r+1)\\
+\end{equation}
+\begin{equation}
+r+1 < y < max\_col\_value - (r+1)\\
+\end{equation}
+\\
+3. Apply gradient operator \emph{$G(x,y,\theta)$} on every pixel belongs to this scope in \emph{Dm} and \emph{Dp}.\\
+We sample $\theta$ for 8 orientations in the interval $\left [ 0,\pi \right )$. 
+Pixel at \emph{(x,y)} will be divided by a diameter at angle $\theta$ in a radius \emph{r} circle into two halves.
+\\\\
+4. Then we can measure $\chi^2$ difference histograms on the two halves of a disc of radius \emph{r} centered at \emph{(x,y)} in \emph{Dm} and \emph{Dp}. The output predicts the posterior probability of a boundary at each image location and orientation. The half-disc regions are described by histograms, which we compare with the 2 histogram difference operator \cite{3}:
+\begin{equation}
+\chi^2\left(g,h\right)=\frac{1}{2}\sum\frac{(g_i-h_i)^2}{g_i+h_i}
+\end{equation}
+\\\\
+5. We show \emph{$MG^-\left(x,y\right)=max_\theta\left\{MG^-\left(x,y,\theta\right)\right\}$} and \emph{$MG^+\left(x,y\right)=max_\theta\left\{MG^+\left(x,y,\theta\right)\right\}$}, respectively \cite{1}. In order to suppress the spurious responses in the motion gradient, \cite{1} takes the geometric mean of $MG^-$ and $MG^+$ using:
+\begin{equation}
+MG\left(x,y,\theta\right)=\sqrt{MG^-\left(x,y,\theta\right)\cdot MG^+\left(x,y,\theta\right)}
+\end{equation}
+
+
+\clearpage
+\nocite{*}
+\bibliographystyle{IEEEannot}
+\bibliography{meng_thesis}
+\end{document}

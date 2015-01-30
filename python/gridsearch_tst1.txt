@@ -1,0 +1,29 @@
+loading data...
+--- Load data in 72.4294919968 seconds ---
+data size is :  24189
+Positive labels:  8989
+Negtive labels:  15200
+data size is :  5330
+Positive labels:  2611
+Negtive labels:  2719
+GridSearchCV took 69859.81 seconds for 12 candidate parameter settings.
+Model with rank: 1
+Mean validation score: 0.811 (std: 0.002)
+Parameters: {'kernel': 'linear', 'C': 1000}
+
+Model with rank: 2
+Mean validation score: 0.810 (std: 0.003)
+Parameters: {'kernel': 'linear', 'C': 1}
+
+Model with rank: 3
+Mean validation score: 0.810 (std: 0.003)
+Parameters: {'kernel': 'linear', 'C': 10}
+
+Model with rank: 4
+Mean validation score: 0.810 (std: 0.003)
+Parameters: {'kernel': 'linear', 'C': 100}
+
+Model with rank: 5
+Mean validation score: 0.570 (std: 0.003)
+Parameters: {'kernel': 'rbf', 'C': 1, 'gamma': 0.001}
+

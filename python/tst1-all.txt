@@ -1,0 +1,7 @@
+loading data...
+--- Load data in 68.3818850517 seconds ---
+data size is :  24189
+Positive labels:  8989
+Negtive labels:  15200
+--- 23901.4641881 seconds ---
+Acuracy:          0.755508980956
